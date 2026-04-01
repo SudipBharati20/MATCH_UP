@@ -1,0 +1,543 @@
+/* ============================================================
+   FIFA SIM — Main Stylesheet
+   Theme: Inter Milan Dark Blue / FC-style UI
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ── VARIABLES ──────────────────────────────────────────── */
+:root {
+  --bg:         #05080f;
+  --bg-card:    #0c1220;
+  --bg-panel:   #111827;
+  --blue:       #0038a8;
+  --blue-light: #1a56db;
+  --blue-glow:  rgba(26,86,219,0.35);
+  --gold:       #f5c518;
+  --gold-dim:   #b8941a;
+  --text:       #e8ecf4;
+  --text-dim:   #7a8ba8;
+  --text-muted: #3d4d63;
+  --border:     rgba(255,255,255,0.07);
+  --border-blue:rgba(26,86,219,0.4);
+  --red:        #e63946;
+  --green:      #2dc653;
+  --white:      #ffffff;
+  --radius:     12px;
+  --radius-sm:  8px;
+}
+
+/* ── RESET ──────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  width: 100%; min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+input, select { font-family: inherit; }
+
+/* ── SCREENS ────────────────────────────────────────────── */
+.screen { display: none; min-height: 100vh; }
+.screen.active { display: flex; flex-direction: column; }
+
+/* ── HEADER NAV ─────────────────────────────────────────── */
+.nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 64px;
+  background: rgba(5,8,15,0.95);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 100;
+  backdrop-filter: blur(10px);
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px; letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--blue-light), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.nav-badge {
+  background: var(--blue);
+  padding: 4px 12px; border-radius: 20px;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 11px;
+  letter-spacing: 2px; color: #fff; text-transform: uppercase;
+}
+
+/* ── HOME SCREEN ─────────────────────────────────────────── */
+#screen-home {
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(0,56,168,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(245,197,24,0.08) 0%, transparent 50%),
+    var(--bg);
+  justify-content: center; align-items: center;
+}
+.home-content {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; gap: 48px; padding: 48px 24px;
+}
+.home-eyebrow {
+  font-family: 'Rajdhani', sans-serif; font-weight: 700;
+  font-size: 13px; letter-spacing: 4px; color: var(--blue-light);
+  text-transform: uppercase;
+}
+.home-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(64px, 10vw, 120px);
+  line-height: 0.9; letter-spacing: 4px;
+  background: linear-gradient(180deg, #fff 0%, var(--text-dim) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.home-title span {
+  background: linear-gradient(90deg, var(--blue-light), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.home-subtitle {
+  font-size: 16px; color: var(--text-dim); max-width: 400px; line-height: 1.6;
+}
+.mode-buttons {
+  display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+}
+.mode-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+  padding: 32px 40px; border-radius: var(--radius);
+  border: 1px solid var(--border-blue);
+  background: var(--bg-card);
+  transition: all 0.3s ease; cursor: pointer; min-width: 200px;
+}
+.mode-btn:hover {
+  border-color: var(--blue-light);
+  background: rgba(26,86,219,0.12);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,56,168,0.3);
+}
+.mode-icon { font-size: 48px; }
+.mode-label {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px;
+  color: var(--white);
+}
+.mode-desc { font-size: 13px; color: var(--text-dim); }
+
+.pitch-preview {
+  position: relative; width: 200px; height: 140px;
+  border: 2px solid rgba(255,255,255,0.1); border-radius: 8px;
+  background: linear-gradient(180deg, #1a3a1a 0%, #0f2a0f 100%);
+  overflow: hidden;
+}
+.pitch-preview::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 40px);
+}
+.pitch-preview::after {
+  content: ""; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 60px; height: 60px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ── TEAM SELECT SCREEN ──────────────────────────────────── */
+#screen-team-select {
+  background: var(--bg);
+}
+.team-select-header {
+  padding: 32px 32px 0;
+  display: flex; flex-direction: column; gap: 8px;
+}
+.team-select-header h2 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px;
+}
+.team-select-header p { color: var(--text-dim); font-size: 14px; }
+
+.league-filter {
+  display: flex; gap: 8px; padding: 20px 32px; overflow-x: auto; flex-wrap: wrap;
+}
+.league-tab {
+  padding: 8px 16px; border-radius: 20px;
+  border: 1px solid var(--border);
+  font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 13px;
+  color: var(--text-dim); cursor: pointer; white-space: nowrap;
+  transition: all 0.2s;
+}
+.league-tab:hover, .league-tab.active {
+  border-color: var(--blue-light); color: var(--white);
+  background: rgba(26,86,219,0.2);
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px; padding: 16px 32px 32px;
+  overflow-y: auto;
+}
+.team-card {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 20px; border-radius: var(--radius);
+  background: var(--bg-card); border: 1px solid var(--border);
+  cursor: pointer; transition: all 0.25s; position: relative; overflow: hidden;
+}
+.team-card::before {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(26,86,219,0.08), transparent);
+  opacity: 0; transition: opacity 0.25s;
+}
+.team-card:hover { border-color: var(--blue-light); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+.team-card:hover::before { opacity: 1; }
+.team-card.disabled { opacity: 0.3; cursor: not-allowed; pointer-events: none; }
+
+.team-badge {
+  width: 52px; height: 52px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.team-initial { font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: #fff; }
+.team-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 16px; }
+.team-meta { font-size: 12px; color: var(--text-dim); margin-top: 2px; }
+.team-ovr {
+  margin-left: auto; font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+  color: var(--gold);
+}
+
+.back-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; margin: 8px 32px 0;
+  border: 1px solid var(--border); border-radius: 8px;
+  color: var(--text-dim); font-size: 14px; transition: all 0.2s;
+  width: fit-content;
+}
+.back-btn:hover { border-color: var(--text-dim); color: var(--white); }
+
+/* ── LINEUP SCREEN ───────────────────────────────────────── */
+#screen-lineup {
+  background: var(--bg);
+}
+.lineup-header {
+  padding: 24px 32px; display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+.lineup-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; }
+
+.lineups-container {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  flex: 1; min-height: 0;
+}
+.lineup-side {
+  padding: 24px; display: flex; flex-direction: column; gap: 16px;
+}
+.lineup-side:first-child { border-right: 1px solid var(--border); }
+
+.lineup-team-header {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 16px; border-radius: 8px;
+  background: var(--bg-card); border: 1px solid var(--border);
+}
+.lth-badge {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: bold; color: #fff;
+}
+.lth-name { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 18px; }
+.lth-tag { font-size: 11px; color: var(--text-dim); }
+.lth-ovr { margin-left: auto; font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--gold); }
+
+.pitch-container {
+  position: relative; border-radius: 8px; overflow: hidden;
+  background: linear-gradient(180deg, #0f2a0f 0%, #1a3a1a 50%, #0f2a0f 100%);
+  border: 1px solid rgba(255,255,255,0.08);
+  min-height: 320px;
+}
+.pitch-lines {
+  position: absolute; inset: 0; pointer-events: none;
+}
+.pitch-lines svg { width: 100%; height: 100%; }
+
+/* Player dots on pitch */
+.player-dot {
+  position: absolute; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 3px;
+  cursor: default; z-index: 2;
+}
+.dot-circle {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 10px;
+  color: #fff; border: 2px solid rgba(255,255,255,0.3);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+}
+.dot-name {
+  font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 10px;
+  color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+  white-space: nowrap; max-width: 60px; overflow: hidden; text-overflow: ellipsis;
+  text-align: center;
+}
+
+.kickoff-footer {
+  padding: 20px 32px; display: flex; justify-content: center; gap: 16px;
+  border-top: 1px solid var(--border);
+}
+.btn-kickoff {
+  padding: 16px 48px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue), var(--blue-light));
+  font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px;
+  color: #fff; transition: all 0.3s; border: 1px solid rgba(255,255,255,0.2);
+}
+.btn-kickoff:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px var(--blue-glow);
+}
+
+/* ── MATCH SCREEN ────────────────────────────────────────── */
+#screen-match {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(0,56,168,0.3) 0%, transparent 60%),
+    var(--bg);
+}
+.match-scoreboard {
+  padding: 32px; text-align: center;
+  background: linear-gradient(180deg, rgba(0,56,168,0.2), transparent);
+  border-bottom: 1px solid var(--border);
+}
+.scoreboard-teams {
+  display: flex; align-items: center; justify-content: center; gap: 32px; margin-bottom: 16px;
+}
+.sb-team-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px;
+  color: var(--text-dim); min-width: 180px;
+}
+.sb-team-name.home { text-align: right; }
+.sb-team-name.away { text-align: left; }
+
+.match-score {
+  font-family: 'Bebas Neue', sans-serif; font-size: 72px; letter-spacing: 8px;
+  color: var(--white); transition: transform 0.2s; line-height: 1;
+}
+.match-score.flash {
+  animation: scoreFlash 0.5s ease;
+}
+@keyframes scoreFlash {
+  0%   { transform: scale(1); color: var(--white); }
+  50%  { transform: scale(1.15); color: var(--gold); }
+  100% { transform: scale(1); color: var(--white); }
+}
+.match-minute-display {
+  display: inline-flex; align-items: center; gap: 8px; margin-top: 8px;
+}
+.minute-badge {
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 16px;
+  color: var(--gold); padding: 4px 12px; border-radius: 4px;
+  background: rgba(245,197,24,0.15); border: 1px solid rgba(245,197,24,0.3);
+}
+.progress-track {
+  margin: 12px auto 0; max-width: 400px; height: 4px;
+  background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--blue-light), var(--gold));
+  transition: width 0.5s linear; border-radius: 2px;
+}
+
+.match-body {
+  display: grid; grid-template-columns: 1fr 340px;
+  gap: 0; flex: 1; overflow: hidden;
+}
+.commentary-panel {
+  padding: 20px; display: flex; flex-direction: column; gap: 12px;
+  border-right: 1px solid var(--border); overflow: hidden;
+}
+.commentary-panel h3 {
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 13px;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim);
+}
+.commentary-feed {
+  flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px;
+  max-height: calc(100vh - 320px);
+}
+.commentary-item {
+  padding: 10px 14px; border-radius: 8px;
+  font-size: 13px; line-height: 1.5;
+  border-left: 3px solid transparent;
+}
+.commentary-item.goal {
+  background: rgba(245,197,24,0.1); border-left-color: var(--gold);
+  color: var(--gold);
+}
+.commentary-item.card {
+  background: rgba(230,57,70,0.08); border-left-color: var(--red);
+  color: #ff9ea6;
+}
+.commentary-item.commentary {
+  background: var(--bg-card); border-left-color: var(--border-blue);
+  color: var(--text-dim);
+}
+.commentary-item.system {
+  background: rgba(26,86,219,0.15); border-left-color: var(--blue-light);
+  color: var(--blue-light); font-weight: 600;
+}
+
+.live-stats-panel {
+  padding: 20px; display: flex; flex-direction: column; gap: 16px; overflow-y: auto;
+}
+.live-stats-panel h3 {
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 13px;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim);
+}
+.stat-row {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.stat-labels {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.stat-label { font-size: 11px; color: var(--text-muted); text-align: center; flex: 1; }
+.stat-home, .stat-away {
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 15px;
+  min-width: 32px;
+}
+.stat-home { color: var(--blue-light); text-align: left; }
+.stat-away { color: var(--gold); text-align: right; }
+.stat-bars {
+  display: flex; height: 6px; border-radius: 3px; overflow: hidden; gap: 2px;
+}
+.bar-home { background: var(--blue-light); border-radius: 3px 0 0 3px; transition: width 0.5s; }
+.bar-away { background: var(--gold); border-radius: 0 3px 3px 0; transition: width 0.5s; }
+
+.fulltime-btn {
+  display: none; margin: 16px auto;
+  padding: 14px 36px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--gold-dim), var(--gold));
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px;
+  color: #000; cursor: pointer; transition: all 0.3s; align-items: center; gap: 8px;
+}
+.fulltime-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,197,24,0.3); }
+
+/* ── POST-MATCH STATS SCREEN ─────────────────────────────── */
+#screen-stats {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(245,197,24,0.06) 0%, transparent 50%),
+    var(--bg);
+  overflow-y: auto;
+}
+.stats-header {
+  padding: 32px; text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.stats-result-text {
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+  letter-spacing: 3px; color: var(--gold); margin-bottom: 8px;
+}
+.stats-teams-score {
+  display: flex; align-items: center; justify-content: center; gap: 24px;
+}
+.stats-team-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 32px; color: var(--text-dim);
+  min-width: 160px;
+}
+.stats-team-name.home { text-align: right; }
+.stats-team-name.away { text-align: left; }
+.stats-score-big {
+  font-family: 'Bebas Neue', sans-serif; font-size: 80px; letter-spacing: 8px;
+  color: var(--white); line-height: 1;
+}
+
+.stats-body {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 24px 32px;
+  max-width: 1100px; margin: 0 auto; width: 100%;
+}
+.stats-panel {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 12px;
+}
+.stats-panel h3 {
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 13px;
+  letter-spacing: 3px; text-transform: uppercase; color: var(--text-dim);
+  margin-bottom: 4px;
+}
+.stats-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 8px 0; border-bottom: 1px solid var(--border);
+}
+.stats-row:last-child { border-bottom: none; }
+.stats-label { font-size: 13px; color: var(--text-dim); text-align: center; flex: 1; }
+.stats-val { font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 18px; min-width: 40px; }
+.stats-val.home { color: var(--blue-light); text-align: left; }
+.stats-val.away { color: var(--gold); text-align: right; }
+
+/* Scorers list */
+.scorers-panel {
+  grid-column: 1 / -1;
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px;
+}
+.scorer-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+  font-size: 14px;
+}
+.scorer-item:last-child { border-bottom: none; }
+.scorer-item.home { border-left: 3px solid var(--blue-light); padding-left: 12px; }
+.scorer-item.away { border-left: 3px solid var(--gold); padding-left: 12px; }
+.scorer-min { font-family: 'Rajdhani', sans-serif; font-weight: 700; color: var(--text-dim); min-width: 36px; }
+.scorer-icon { font-size: 16px; }
+.scorer-name { font-weight: 600; }
+.scorer-assist { color: var(--text-dim); font-size: 12px; }
+.scorer-team { margin-left: auto; font-size: 12px; color: var(--text-dim); }
+.no-goals { text-align: center; color: var(--text-dim); padding: 16px 0; font-size: 14px; }
+
+/* Player ratings */
+.ratings-panel {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; display: flex; flex-direction: column; gap: 4px;
+}
+.player-rating-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.player-rating-row:last-child { border-bottom: none; }
+.pr-pos {
+  width: 36px; text-align: center; font-family: 'Rajdhani', sans-serif;
+  font-weight: 700; font-size: 10px; border-radius: 4px; padding: 2px 4px; color: #fff;
+}
+.pr-name { flex: 1; font-size: 13px; color: var(--text); }
+.pr-score {
+  font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 16px;
+  width: 36px; text-align: right;
+}
+.pr-score.gold   { color: var(--gold); }
+.pr-score.green  { color: var(--green); }
+.pr-score.normal { color: var(--text); }
+.pr-score.poor   { color: var(--text-dim); }
+
+.stats-actions {
+  display: flex; justify-content: center; padding: 24px;
+  border-top: 1px solid var(--border); margin-top: auto;
+}
+.btn-play-again {
+  padding: 14px 40px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--blue), var(--blue-light));
+  font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px;
+  color: #fff; transition: all 0.3s;
+}
+.btn-play-again:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--blue-glow); }
+
+/* ── SCROLLBAR ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border-blue); border-radius: 2px; }
+
+/* ── RESPONSIVE ──────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .lineups-container, .match-body, .stats-body {
+    grid-template-columns: 1fr;
+  }
+  .lineup-side:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+  .match-body .commentary-panel { border-right: none; border-bottom: 1px solid var(--border); }
+  .scoreboard-teams { gap: 16px; }
+  .sb-team-name { font-size: 18px; min-width: 100px; }
+  .match-score { font-size: 52px; }
+  .nav { padding: 0 16px; }
+  .team-select-header, .league-filter, .team-grid { padding-left: 16px; padding-right: 16px; }
+  .back-btn { margin-left: 16px; }
+  .lineup-header { padding: 16px; }
+  .stats-body { padding: 16px; }
+  .scorers-panel { grid-column: 1; }
+}
