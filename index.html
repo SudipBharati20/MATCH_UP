@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FIFA SIM — Top 5 Leagues Match Simulator</title>
+  <link rel="stylesheet" href="../CSS/style.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 1: HOME
+═══════════════════════════════════════════════════════════ -->
+<div id="screen-home" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">FIFA SIM</div>
+    <div class="nav-badge">FC 26 Ratings</div>
+  </nav>
+
+  <div class="home-content">
+    <p class="home-eyebrow">Top 5 Leagues · Real FC 26 Ratings</p>
+    <h1 class="home-title">FIFA<br><span>SIM</span></h1>
+    <p class="home-subtitle">Build your squad, simulate 90 minutes, and see if your team has what it takes.</p>
+
+    <div class="mode-buttons">
+      <button class="mode-btn" id="btn-single">
+        <div class="mode-icon">🎮</div>
+        <div class="mode-label">Single Player</div>
+        <div class="mode-desc">You vs CPU — pick your team</div>
+      </button>
+      <button class="mode-btn" id="btn-multi">
+        <div class="mode-icon">👥</div>
+        <div class="mode-label">Multiplayer</div>
+        <div class="mode-desc">Hot-seat — 2 players, 1 device</div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 2: TEAM SELECT
+═══════════════════════════════════════════════════════════ -->
+<div id="screen-team-select" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">FIFA SIM</div>
+    <div class="nav-badge">Team Select</div>
+  </nav>
+
+  <div class="team-select-header">
+    <h2 id="team-select-title">Choose Your Team</h2>
+    <p id="team-select-subtitle">Select a club from the Top 5 European Leagues</p>
+  </div>
+
+  <button class="back-btn" id="btn-team-back">← Back</button>
+
+  <div id="league-filter" class="league-filter"></div>
+  <div id="team-grid" class="team-grid"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 3: LINEUP PREVIEW
+═══════════════════════════════════════════════════════════ -->
+<div id="screen-lineup" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">FIFA SIM</div>
+    <div class="nav-badge">Line-up</div>
+  </nav>
+
+  <div class="lineup-header">
+    <h2>Lineup Preview</h2>
+    <button class="back-btn" id="btn-lineup-back">← Change Team</button>
+  </div>
+
+  <div class="lineups-container">
+    <!-- HOME -->
+    <div class="lineup-side">
+      <div class="lineup-team-header">
+        <div class="lth-badge" id="home-badge">H</div>
+        <div>
+          <div class="lth-name" id="lineup-home-name">Home Team</div>
+          <div class="lth-tag">Player 1</div>
+        </div>
+        <div class="lth-ovr" id="home-ovr">80</div>
+      </div>
+      <div class="pitch-container" id="pitch-home">
+        <!-- SVG pitch lines -->
+        <div class="pitch-lines">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="5" width="80" height="90" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <line x1="10" y1="50" x2="90" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <circle cx="50" cy="50" r="12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <rect x="30" y="5" width="40" height="12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <rect x="30" y="83" width="40" height="12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <rect x="38" y="5" width="24" height="6" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <rect x="38" y="89" width="24" height="6" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- AWAY -->
+    <div class="lineup-side">
+      <div class="lineup-team-header">
+        <div class="lth-badge" id="away-badge">A</div>
+        <div>
+          <div class="lth-name" id="lineup-away-name">Away Team</div>
+          <div class="lth-tag" id="away-label">CPU</div>
+        </div>
+        <div class="lth-ovr" id="away-ovr">80</div>
+      </div>
+      <div class="pitch-container" id="pitch-away">
+        <div class="pitch-lines">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="10" y="5" width="80" height="90" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <line x1="10" y1="50" x2="90" y2="50" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <circle cx="50" cy="50" r="12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <rect x="30" y="5" width="40" height="12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <rect x="30" y="83" width="40" height="12" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <rect x="38" y="5" width="24" height="6" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+            <rect x="38" y="89" width="24" height="6" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="kickoff-footer">
+    <button class="back-btn" id="btn-lineup-back-bottom" onclick="document.getElementById('btn-lineup-back').click()">← Back</button>
+    <button class="btn-kickoff" id="btn-kick-off">⚽ KICK OFF</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 4: LIVE MATCH
+═══════════════════════════════════════════════════════════ -->
+<div id="screen-match" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">FIFA SIM</div>
+    <div class="nav-badge">Live</div>
+  </nav>
+
+  <div class="match-scoreboard">
+    <div class="scoreboard-teams">
+      <div class="sb-team-name home" id="match-home-name">Home</div>
+      <div class="match-score" id="match-score">0 – 0</div>
+      <div class="sb-team-name away" id="match-away-name">Away</div>
+    </div>
+    <div class="match-minute-display">
+      <span class="minute-badge" id="match-minute">0'</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="match-progress"></div>
+    </div>
+    <button class="fulltime-btn" id="btn-fulltime">🏆 Full-Time — View Stats</button>
+  </div>
+
+  <div class="match-body">
+    <!-- Commentary -->
+    <div class="commentary-panel">
+      <h3>🎙 Live Commentary</h3>
+      <div class="commentary-feed" id="commentary-feed"></div>
+    </div>
+
+    <!-- Live Stats -->
+    <div class="live-stats-panel">
+      <h3>📊 Live Stats</h3>
+
+      <div class="stat-row" id="stat-poss">
+        <div class="stat-labels">
+          <span class="stat-home">50%</span>
+          <span class="stat-label">Possession</span>
+          <span class="stat-away">50%</span>
+        </div>
+        <div class="stat-bars">
+          <div class="bar-home" style="width:50%"></div>
+          <div class="bar-away" style="width:50%"></div>
+        </div>
+      </div>
+
+      <div class="stat-row" id="stat-shots">
+        <div class="stat-labels">
+          <span class="stat-home">0</span>
+          <span class="stat-label">Shots</span>
+          <span class="stat-away">0</span>
+        </div>
+        <div class="stat-bars">
+          <div class="bar-home" style="width:50%"></div>
+          <div class="bar-away" style="width:50%"></div>
+        </div>
+      </div>
+
+      <div class="stat-row" id="stat-sot">
+        <div class="stat-labels">
+          <span class="stat-home">0</span>
+          <span class="stat-label">Shots on Target</span>
+          <span class="stat-away">0</span>
+        </div>
+        <div class="stat-bars">
+          <div class="bar-home" style="width:50%"></div>
+          <div class="bar-away" style="width:50%"></div>
+        </div>
+      </div>
+
+      <div class="stat-row" id="stat-corners">
+        <div class="stat-labels">
+          <span class="stat-home">0</span>
+          <span class="stat-label">Corners</span>
+          <span class="stat-away">0</span>
+        </div>
+        <div class="stat-bars">
+          <div class="bar-home" style="width:50%"></div>
+          <div class="bar-away" style="width:50%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     SCREEN 5: POST-MATCH STATS
+═══════════════════════════════════════════════════════════ -->
+<div id="screen-stats" class="screen">
+  <nav class="nav">
+    <div class="nav-logo">FIFA SIM</div>
+    <div class="nav-badge">Full Time</div>
+  </nav>
+
+  <div class="stats-header">
+    <div class="stats-result-text" id="stats-result">Match Over</div>
+    <div class="stats-teams-score">
+      <div class="stats-team-name home" id="stats-home-name">Home</div>
+      <div class="stats-score-big" id="stats-score">0 – 0</div>
+      <div class="stats-team-name away" id="stats-away-name">Away</div>
+    </div>
+  </div>
+
+  <div class="stats-body">
+    <!-- Match Stats -->
+    <div class="stats-panel">
+      <h3>📊 Match Stats</h3>
+      <div id="stats-table"></div>
+    </div>
+
+    <!-- Goal Scorers -->
+    <div class="scorers-panel">
+      <h3>⚽ Goal Scorers</h3>
+      <div id="scorers-list"></div>
+    </div>
+
+    <!-- Player Ratings Home -->
+    <div class="ratings-panel">
+      <h3 id="ratings-home-title">🏠 Home Ratings</h3>
+      <div id="ratings-home"></div>
+    </div>
+
+    <!-- Player Ratings Away -->
+    <div class="ratings-panel">
+      <h3 id="ratings-away-title">✈️ Away Ratings</h3>
+      <div id="ratings-away"></div>
+    </div>
+  </div>
+
+  <div class="stats-actions">
+    <button class="btn-play-again" id="btn-play-again">🔄 Play Again</button>
+  </div>
+</div>
+
+<!-- ── SCRIPTS ─────────────────────────────────────────── -->
+<script src="../JS/app.js"></script>
+<script src="../JS/engine.js"></script>
+<script src="../JS/data.js"></script>
+</body>
+</html>
